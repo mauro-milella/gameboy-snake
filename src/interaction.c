@@ -46,7 +46,7 @@ void jopyad_input(
     // Update only if a direction is choosen, otherwise just move as before
     int8_t _speed = delta_x + delta_y;
     if (_speed < 0) {
-        _speed *= -1;
+        _speed = -_speed;
     }
 
     if (_speed == 1) {

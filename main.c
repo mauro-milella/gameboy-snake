@@ -1,13 +1,10 @@
 #include <gb/gb.h>
+#include <time.h>
 
 #include "audio.h"
 #include "interaction.h"
 #include "snake_sprites.h"
 #include "screen.h"
-
-uint8_t snake_x, snake_y;
-int8_t direction_x, direction_y;
-uint8_t joypad_current=0, joypad_previous=0;
 
 void main(void)
 {
@@ -18,6 +15,11 @@ void main(void)
     DISPLAY_ON;
     SHOW_SPRITES;
     SPRITES_8x8;
+
+    // Gameplay initialization
+    uint8_t snake_x, snake_y;
+    int8_t direction_x=0, direction_y=0;
+    uint8_t joypad_current=0, joypad_previous=0;
 
     // Snake head initialization
     uint8_t sprite_id = 0;
@@ -30,14 +32,15 @@ void main(void)
 
     // Main game loop
     while (1) {
-        // Manage movement
-        jopyad_input(&joypad_current, &joypad_previous, &direction_x, &direction_y);
+        // Manage movement when it is time to do so
+        if ( ###condition on time here### ) {
 
-        // TODO - only move each time a delta_time is passed
-        snake_x += direction_x*8;
-        snake_y += direction_y*8;
+            jopyad_input(&joypad_current, &joypad_previous, &direction_x, &direction_y);
+            snake_x += direction_x+4;
+            snake_y += direction_y+4;
 
-        move_sprite(sprite_id, snake_x+DX_CORRECTION, snake_y+DY_CORRECTION);
+            move_sprite(sprite_id, snake_x+DX_CORRECTION, snake_y+DY_CORRECTION);
+        }
 
         // Halt until next frame
         vsync();
