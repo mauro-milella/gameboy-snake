@@ -11,6 +11,7 @@ uint8_t joypad_current=0, joypad_previous=0;
 
 void main(void)
 {
+    // Audio initialization
     audio_simple_init();
 
     // Display initialization
