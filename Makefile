@@ -1,5 +1,5 @@
 # Change accordingly
-GBDK_PATH=../gbdk/bin/lcc
+GBDK_PATH=./lib/gbdk/bin/lcc
 
 INCLUDE_PATH=./include
 SRC_PATH=./src
