@@ -2,7 +2,7 @@
 
 #include "audio.h"
 #include "interaction.h"
-#include "simplesprite.h"
+#include "snake_sprites.h"
 #include "screen.h"
 
 uint8_t sprite_x, sprite_y;
@@ -23,7 +23,7 @@ void main(void)
     sprite_x = 80;
     sprite_y = 70;
 
-    set_sprite_data(sprite_id, 1, simple_sprite);
+    set_sprite_data(sprite_id, 1, snake_head_sprite);
     set_sprite_tile(sprite_id, 0);
     move_sprite(sprite_id, sprite_x, sprite_y);
 
