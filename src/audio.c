@@ -1,7 +1,7 @@
 #include <gb/gb.h>
 
+// Audio initialization: keep the order as is!
 void audio_simple_init() {
-    // Audio initialization: keep the order as is!
     NR52_REG = 0x80; // Turns on sound
     NR50_REG = 0x77; // Set volume to max
     NR51_REG = 0xFF; // Select all the four audio channels for both left and right
