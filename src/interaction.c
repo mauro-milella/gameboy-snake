@@ -1,8 +1,10 @@
 #include <gb/gb.h>
 
 #include <audio.h>
+#include <generics.h>
 #include <interaction.h>
 #include <screen.h>
+#include <snake.h>
 
 void jopyad_input(uint8_t* joypad_current, struct coordinate* delta_pos)
 {
@@ -44,20 +46,26 @@ void jopyad_input(uint8_t* joypad_current, struct coordinate* delta_pos)
     }
 }
 
-void move(uint8_t sprite_id, uint8_t* snake_x, uint8_t* snake_y, int8_t* direction_x, int8_t* direction_y, struct coordinate* delta_pos)
+void move(struct snake* snake, struct coordinate* delta_pos)
 {
-    if (delta_pos->x != -(*direction_x) && delta_pos->y != -(*direction_y)) {
-        *direction_x = delta_pos->x;
-        *direction_y = delta_pos->y;
+    if (delta_pos->x != -snake->head_direction_x && 
+        delta_pos->y != -snake->head_direction_y) {
+        snake->head_direction_x = delta_pos->x;
+        snake->head_direction_y = delta_pos->y;
     }
 
-    *snake_x += *direction_x*8;
-    *snake_y += *direction_y*8;
+    snake->position.x = snake->head_direction_x*8;
+    snake->position.y = snake->head_direction_y*8;
 
-    move_sprite(sprite_id, *snake_x+DX_CORRECTION, *snake_y+DY_CORRECTION);
-    pacman_effect(snake_x, snake_y);
+    move_sprite(
+        snake->sprite_id, 
+        snake->position.x+DX_CORRECTION, 
+        snake->position.y+DY_CORRECTION);
+    
+    pacman_effect(snake);
 }
 
+// Deprecated
 void auto_bouncy_interaction(
     uint8_t* sprite_x,
     uint8_t* sprite_y,

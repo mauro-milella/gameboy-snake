@@ -4,5 +4,6 @@
 #include <gb/gb.h>
 
 extern unsigned char snake_head_sprite[16];
+extern unsigned char snake_body_sprite[16];
 
 #endif

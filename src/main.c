@@ -3,8 +3,8 @@
 
 #include <audio.h>
 #include <interaction.h>
-#include <snake_sprites.h>
 #include <screen.h>
+#include <snake.h>
 
 void main(void)
 {
@@ -19,14 +19,15 @@ void main(void)
     uint8_t elapsed_frames = 0;
 
     // Gameplay initialization
-    uint8_t snake_x = 80, snake_y = 72;
-    int8_t direction_x=1, direction_y=0;
-    uint8_t sprite_id = 0;
+    struct snake snake;
+    initialize(&snake);
+
     struct coordinate delta_pos = {.x = 0, .y = 0};
 
-    set_sprite_data(sprite_id, 1, snake_head_sprite);
-    set_sprite_tile(sprite_id, 0);
-    move_sprite(sprite_id, snake_x, snake_y);
+    set_sprite_data(snake.sprite_id, 1, snake.snake_head_sprite);
+    set_sprite_tile(snake.sprite_id, 0);
+
+    move_sprite(snake.sprite_id, snake.position.x, snake.position.y);
 
     // Main game loop
     while (1) {
@@ -37,7 +38,7 @@ void main(void)
         // Manage movement when it is time to do so
         if (elapsed_frames > REFRESH_FACTOR) {
             elapsed_frames = 0;
-            move(sprite_id, &snake_x, &snake_y, &direction_x, &direction_y, &delta_pos);
+            move(&snake, &delta_pos);
         }
 
         // Halt until next frame

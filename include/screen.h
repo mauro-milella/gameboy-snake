@@ -1,6 +1,8 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#include <snake.h>
+
 /*
 Number of vsync() calls that must pass before computing certain discretized actions;
 for example, snake's movement.
@@ -29,6 +31,6 @@ and 16 px above their actual y position, hence, sprites at 0x0 are not visible.
 #define SPRITE_SIZE 8
 #define HALF_SPRITE_SIZE 4
 
-void pacman_effect(uint8_t* x, uint8_t* y);
+void pacman_effect(struct snake* snake);
 
 #endif
