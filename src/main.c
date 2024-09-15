@@ -5,6 +5,7 @@
 #include <interaction.h>
 #include <screen.h>
 #include <snake.h>
+#include <snake_sprites.h>
 
 void main(void)
 {
@@ -24,10 +25,11 @@ void main(void)
 
     int8_vector2 delta_pos = {.x = 0, .y = 0};
 
-    set_sprite_data(snake.sprite_id, 1, snake.snake_head_sprite);
-    set_sprite_tile(snake.sprite_id, 0);
+    set_sprite_data(snake.sprite_id[0], 1, snake_head_sprite);
+    set_sprite_data(snake.sprite_id[1], 1, snake_tail_sprite);
 
-    move_sprite(snake.sprite_id, snake.position.x, snake.position.y);
+    set_sprite_tile(snake.sprite_id[0], 0);
+    move_sprite(snake.sprite_id[0], snake.position.x, snake.position.y);
 
     // Main game loop
     while (1) {
@@ -38,7 +40,10 @@ void main(void)
         // Manage movement when it is time to do so
         if (elapsed_frames > REFRESH_FACTOR) {
             elapsed_frames = 0;
-            move(&snake, &delta_pos);
+            
+            move_head(&snake, &delta_pos);
+            move_tail(&snake);
+            draw(&snake);
         }
 
         // Halt until next frame

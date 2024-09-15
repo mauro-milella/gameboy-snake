@@ -1,19 +1,13 @@
 #ifndef INTERACTION_H
 #define INTERACTION_H
 
-#include <snake.h>
+#include <generics.h>
 
 /*
 Handle joypad input;
 e.g.: update velocities.
 */
 void jopyad_input(uint8_t* joypad_current, int8_vector2* delta_pos);
-
-/*
-This is specifically designed to move the snake safely;
-the new direction proposed by `joypad_input` is validated and then applied.
-*/
-void move(struct snake* snake, int8_vector2* delta_pos);
 
 /*
 This function makes a sprite bounce all over the window, and it's just an experiment.

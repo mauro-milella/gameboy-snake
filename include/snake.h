@@ -5,18 +5,27 @@
 
 #include <generics.h>
 
+#define SNAKE_MAX_SIZE 180
+#define SNAKE_INIT_SIZE 5
+
 struct snake {
     struct coordinate position;
+    struct coordinate prev_position;
+    int8_vector2 direction;
 
-    int8_vector2 head_direction;
+    struct coordinate tail_cells[SNAKE_MAX_SIZE];
+    uint8_t tail_size;
 
-    uint8_t sprite_id;
-    unsigned char snake_head_sprite[16];
-    unsigned char snake_body_sprite[16];
-
-    // TODO - implement the tail
+    uint8_t sprite_id[2];
 };
 
 void initialize(struct snake* snake);
+
+void move_head(struct snake* snake, int8_vector2* delta_pos);
+
+// Returns 0 if any tail's cell overlaps with snake's head, 1 otherwise.
+uint8_t move_tail(struct snake* snake);
+
+void draw(struct snake* snake);
 
 #endif
