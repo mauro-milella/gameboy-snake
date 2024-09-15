@@ -23,7 +23,11 @@ void initialize(struct snake* snake)
 
     // Head and cell sprite ids
     snake->sprite_id[0] = 0;
-    snake->sprite_id[1] = 1;
+    set_sprite_tile(snake->sprite_id[0], 0);
+    for (uint8_t i=1; i<SNAKE_MAX_SIZE+1; i++) {
+        snake->sprite_id[i] = i;
+        set_sprite_tile(snake->sprite_id[i], 1);
+    }
 }
 
 void move_head(struct snake* snake, int8_vector2* delta_pos)
@@ -64,18 +68,11 @@ uint8_t move_tail(struct snake* snake)
 
 void draw(struct snake* snake)
 {
-    set_sprite_tile(snake->sprite_id[0], 0);
-    set_sprite_tile(snake->sprite_id[1], 1);
-    
-    move_sprite(
-        snake->sprite_id[0], 
-        snake->position.x+DX_CORRECTION, 
-        snake->position.y+DY_CORRECTION
-    );
-
-    for (int i=0; i<snake->tail_size; i++) {
+    for (int i=0; i<snake->tail_size+1; i++) {
+        set_sprite_tile(snake->sprite_id[i], i>0 && i<=snake->tail_size);
+        
         move_sprite(
-            snake->sprite_id[1],
+            snake->sprite_id[i],
             snake->tail_cells[i].x+DX_CORRECTION,
             snake->tail_cells[i].y+DY_CORRECTION
         );
