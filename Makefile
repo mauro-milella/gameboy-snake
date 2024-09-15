@@ -7,7 +7,7 @@ OBJ_PATH=./obj
 BIN_PATH=./bin
 
 INCLUDE_FILES=$(wildcard $(INCLUDE_PATH)/*.h)
-SRC_FILES=$(wildcard $(SRC_PATH)/*.c $(INCLUDE_PATH)/*.c) main.c
+SRC_FILES=$(wildcard $(SRC_PATH)/*.c $(INCLUDE_PATH)/*.c)
 OBJ_FILES=$(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(SRC_FILES)))
 
 FLAGS=-I$(INCLUDE_PATH)
@@ -19,11 +19,6 @@ all: directories $(TARGET) clean
 
 $(TARGET): $(OBJ_FILES)
 	$(GBDK_PATH) $(FLAGS) -o $(TARGET) $(OBJ_FILES)
-
-# for some reason, the generated .o is not moved automatically into obj
-$(OBJ_PATH)/main.o: main.c $(INCLUDE_FILES)
-	$(GBDK_PATH) $(FLAGS) -c main.c -o main.o
-	mv main.o obj
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INCLUDE_FILES)
 	$(GBDK_PATH) $(FLAGS) -c $< -o $@
