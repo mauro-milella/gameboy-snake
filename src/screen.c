@@ -2,19 +2,19 @@
 #include <screen.h>
 
 void pacman_effect(uint8_t* x, uint8_t* y) {
-    if ((*x) < LO_BOUND_X) {
-        (*x) = (uint8_t)(HI_BOUND_X-HALF_SPRITE);
+    if ((*x) <= LO_BOUND_X) {
+        (*x) = HI_BOUND_X;
     } 
-    else if ((*x) > HI_BOUND_X)
+    else if ((*x) >= HI_BOUND_X)
     {
-        (*x) = LO_BOUND_X+HALF_SPRITE;
+        (*x) = LO_BOUND_X;
     }
     
     if ((*y) < LO_BOUND_Y) {
-        (*y) = (uint8_t)(HI_BOUND_Y-HALF_SPRITE);
+        (*y) = HI_BOUND_Y;
     } 
     else if ((*y) > HI_BOUND_Y)
     {
-        (*y) = LO_BOUND_Y+HALF_SPRITE;
+        (*y) = LO_BOUND_Y;
     }
 }
