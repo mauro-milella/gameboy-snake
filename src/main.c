@@ -22,7 +22,7 @@ void main(void)
     struct snake snake;
     initialize(&snake);
 
-    struct coordinate delta_pos = {.x = 0, .y = 0};
+    int8_vector2 delta_pos = {.x = 0, .y = 0};
 
     set_sprite_data(snake.sprite_id, 1, snake.snake_head_sprite);
     set_sprite_tile(snake.sprite_id, 0);

@@ -4,9 +4,8 @@
 #include <generics.h>
 #include <interaction.h>
 #include <screen.h>
-#include <snake.h>
 
-void jopyad_input(uint8_t* joypad_current, struct coordinate* delta_pos)
+void jopyad_input(uint8_t* joypad_current, int8_vector2* delta_pos)
 {
     int8_t delta_x = 0, delta_y = 0;
 
@@ -46,16 +45,16 @@ void jopyad_input(uint8_t* joypad_current, struct coordinate* delta_pos)
     }
 }
 
-void move(struct snake* snake, struct coordinate* delta_pos)
+void move(struct snake* snake, int8_vector2* delta_pos)
 {
-    if (delta_pos->x != -snake->head_direction_x && 
-        delta_pos->y != -snake->head_direction_y) {
-        snake->head_direction_x = delta_pos->x;
-        snake->head_direction_y = delta_pos->y;
+    if (delta_pos->x != -snake->head_direction.x && 
+        delta_pos->y != -snake->head_direction.y) {
+        snake->head_direction.x = delta_pos->x;
+        snake->head_direction.y = delta_pos->y;
     }
 
-    snake->position.x = snake->head_direction_x*8;
-    snake->position.y = snake->head_direction_y*8;
+    snake->position.x += snake->head_direction.x*8;
+    snake->position.y += snake->head_direction.y*8;
 
     move_sprite(
         snake->sprite_id, 

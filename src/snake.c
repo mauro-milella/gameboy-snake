@@ -8,8 +8,8 @@ void initialize(struct snake* snake)
     snake->position.x = 80;
     snake->position.y = 72;
 
-    snake->head_direction_x = 1;
-    snake->head_direction_y = 0;
+    snake->head_direction.x = 1;
+    snake->head_direction.y = 0;
 
     snake->sprite_id = 0;
 

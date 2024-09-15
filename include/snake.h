@@ -8,8 +8,7 @@
 struct snake {
     struct coordinate position;
 
-    int8_t head_direction_x;
-    int8_t head_direction_y;
+    int8_vector2 head_direction;
 
     uint8_t sprite_id;
     unsigned char snake_head_sprite[16];
