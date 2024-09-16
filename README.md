@@ -7,7 +7,8 @@ Minimal implementation of the classical snake game, for the original Gameboy.
 Download and extract the [2020 GBDK](https://github.com/gbdk-2020/gbdk-2020) library inside `lib` folder.
 
 Portability is guaranteed for Linux.
-To support other operating systems, I think in this case you just need to change the makefile.
+
+To support other operating systems, you can try to adjust the makefile.
 
 # Usage
 
