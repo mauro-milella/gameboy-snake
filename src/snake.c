@@ -81,7 +81,7 @@ void draw_snake(struct snake* snake)
 {
     for (int i=0; i<snake->tail_size+1; i++) {
         set_sprite_tile(snake->sprite_id[i], i>0 && i<=snake->tail_size);
-        
+
         move_sprite(
             snake->sprite_id[i],
             snake->tail_cells[i].x+DX_CORRECTION,

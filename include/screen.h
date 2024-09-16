@@ -8,17 +8,21 @@ Number of vsync() calls that must pass before computing certain discretized acti
 for example, snake's movement.
 The lower the factor, the faster is the game, hence, harder.
 */
-#define REFRESH_FACTOR 30
+#define REFRESH_FACTOR 10
 #define MINIMUM_REFRESH_FACTOR 7
 
 /*
 Screen resolution is 160x144;
 since each sprite is an 8x8 tile, those values are necessary to clip it.
 */
-#define LO_BOUND_X 8
-#define HI_BOUND_X 152
-#define LO_BOUND_Y 16
+#define LO_BOUND_X 0
+#define HI_BOUND_X 160
+#define LO_BOUND_Y 0
 #define HI_BOUND_Y 144
+// #define LO_BOUND_X 8
+// #define HI_BOUND_X 152
+// #define LO_BOUND_Y 16
+// #define HI_BOUND_Y 144
 
 /*
 Sprite rendering coordinates correction.

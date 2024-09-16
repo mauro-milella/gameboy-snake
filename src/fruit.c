@@ -17,7 +17,7 @@ void initialize_fruit(struct fruit* fruit)
 
     place(fruit);
 
-    fruit->point = 1;
+    fruit->score_reward = 1;
 
     fruit->sprite_id = 31; // Keep in mind that those between 0 and 30 are already reserved!
     set_sprite_data(FRUIT_TILE_ID, 1, fruit_sprite);
@@ -25,26 +25,33 @@ void initialize_fruit(struct fruit* fruit)
 
 void place(struct fruit* fruit)
 {
-    // FIX - probably, there is a casting problem here
-    fruit->position.x = (uint8_t)(rand() % (HI_BOUND_X-LO_BOUND_X+1) + HI_BOUND_X);
-    fruit->position.y = (uint8_t)(rand() % (HI_BOUND_Y-LO_BOUND_Y+1) + LO_BOUND_Y);
+    // Consider a 16x18 grid.
+    // Choose a random cell (row in [0,15], col in [0-17]),
+    // then convert the cell to an actual position.
+
+    uint8_t row = (uint8_t)rand() % 16;
+    uint8_t col = (uint8_t)rand() % 18;
+
+    fruit->position.x = col*8;
+    fruit->position.y = row*8;
 }
 
-uint8_t pickup(struct fruit* fruit, struct coordinate position)
+uint8_t pickup(struct fruit* fruit, struct coordinate* position)
 {
-    if (fruit->position.x == position.x && fruit->position.y == position.y) {
-        return 1;
+    if (fruit->position.x == position->x && fruit->position.y == position->y) {
+        return (uint8_t)1;
     }
 
-    return 0;
+    return (uint8_t)0;
 }
 
 void draw_fruit(struct fruit* fruit) 
 {
     set_sprite_tile(fruit->sprite_id, 2);
+    
     move_sprite(
         fruit->sprite_id,
-        fruit->position.x+DX_CORRECTION,
+        fruit->position.x+DX_CORRECTION,        
         fruit->position.y+DY_CORRECTION
     );
 }

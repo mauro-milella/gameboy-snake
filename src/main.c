@@ -43,6 +43,8 @@ uint8_t play(void)
 
     int8_vector2 delta_pos = {.x = 0, .y = 0}; // Continuously updated by `joypad_input`
 
+    uint8_t score = 0;
+
     // Main game loop
     while (1) {
         ++elapsed_frames;
@@ -54,13 +56,22 @@ uint8_t play(void)
             elapsed_frames = 0;
             
             move_head(&snake, &delta_pos);
+            uint8_t alive = move_tail(&snake);
+            draw_snake(&snake);
             
-            if (move_tail(&snake) == 0) {
+            if (!alive) {
                 printf("Game over\n");
                 return 0;
             }
 
-            draw_snake(&snake);
+            if (pickup(&fruit, &snake.position)) {
+                score += fruit.score_reward;
+                place(&fruit);
+                snake.tail_size++;
+                
+                printf("Score: %d\n", score);
+            }
+
             draw_fruit(&fruit);
         }
 
