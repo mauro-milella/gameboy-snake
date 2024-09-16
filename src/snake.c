@@ -1,9 +1,19 @@
 #include <screen.h>
 #include <snake.h>
 
-extern struct snake;
+unsigned char snake_head_sprite[16] = 
+{
+    0x3C,0x3C,0x42,0x42,0x81,0x81,0xA5,0xA5,
+    0x81,0x81,0x81,0xA5,0x42,0x5A,0x3C,0x3C
+};
 
-void initialize(struct snake* snake) 
+unsigned char snake_tail_sprite[16] = 
+{
+    0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+    0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
+};
+
+void initialize_snake(struct snake* snake) 
 {
     snake->position.x = snake->prev_position.x = 80;
     snake->position.y = snake->prev_position.y = 72;
@@ -22,11 +32,12 @@ void initialize(struct snake* snake)
     }
 
     // Head and cell sprite ids
+    set_sprite_data(HEAD_TILE_ID, 1, snake_head_sprite);
+    set_sprite_data(BODY_TILE_ID, 1, snake_tail_sprite);
+    
     snake->sprite_id[0] = 0;
-    set_sprite_tile(snake->sprite_id[0], 0);
-    for (uint8_t i=1; i<SNAKE_MAX_SIZE+1; i++) {
+    for (uint8_t i=1; i<SNAKE_MAX_SIZE; i++) {
         snake->sprite_id[i] = i;
-        set_sprite_tile(snake->sprite_id[i], 1);
     }
 }
 
@@ -66,7 +77,7 @@ uint8_t move_tail(struct snake* snake)
     return 1;
 }
 
-void draw(struct snake* snake)
+void draw_snake(struct snake* snake)
 {
     for (int i=0; i<snake->tail_size+1; i++) {
         set_sprite_tile(snake->sprite_id[i], i>0 && i<=snake->tail_size);

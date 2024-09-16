@@ -3,6 +3,8 @@
 
 #include <gb/gb.h>
 
+#define GAME_SEED 111
+
 struct coordinate {
     uint8_t x;
     uint8_t y;
